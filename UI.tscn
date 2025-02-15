@@ -1,0 +1,57 @@
+[gd_scene load_steps=3 format=3 uid="uid://s03bt1njl04r"]
+
+[ext_resource type="Script" path="res://drum_roll.gd" id="1_kp6py"]
+[ext_resource type="PackedScene" uid="uid://duxnmj6k6phes" path="res://drum_panel.tscn" id="2_fm6mv"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 182.0
+offset_top = 60.0
+offset_right = -222.0
+offset_bottom = -346.0
+color = Color(0.535023, 0.535023, 0.535023, 1)
+
+[node name="drum_roll" type="GridContainer" parent="."]
+layout_mode = 0
+offset_left = 215.0
+offset_top = 89.0
+offset_right = 894.0
+offset_bottom = 129.0
+theme_override_constants/h_separation = 45
+columns = 9
+script = ExtResource("1_kp6py")
+
+[node name="Panel" parent="drum_roll" instance=ExtResource("2_fm6mv")]
+layout_mode = 2
+
+[node name="Panel2" parent="drum_roll" instance=ExtResource("2_fm6mv")]
+layout_mode = 2
+
+[node name="Panel3" parent="drum_roll" instance=ExtResource("2_fm6mv")]
+layout_mode = 2
+
+[node name="Panel4" parent="drum_roll" instance=ExtResource("2_fm6mv")]
+layout_mode = 2
+
+[node name="Panel5" parent="drum_roll" instance=ExtResource("2_fm6mv")]
+layout_mode = 2
+
+[node name="Panel6" parent="drum_roll" instance=ExtResource("2_fm6mv")]
+layout_mode = 2
+
+[node name="Panel7" parent="drum_roll" instance=ExtResource("2_fm6mv")]
+layout_mode = 2
+
+[node name="Panel8" parent="drum_roll" instance=ExtResource("2_fm6mv")]
+layout_mode = 2
