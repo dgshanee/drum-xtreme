@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://dhrr2be82k80p"]
+
+[ext_resource type="Script" path="res://editor.gd" id="1_ukudj"]
+
+[node name="Editor" type="GridContainer"]
+offset_left = -1.0
+offset_top = -1.0
+offset_right = 1389.0
+offset_bottom = 187.0
+theme_override_constants/h_separation = 45
+script = ExtResource("1_ukudj")
+bars = null
+arr = null

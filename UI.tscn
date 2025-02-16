@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://s03bt1njl04r"]
+[gd_scene load_steps=5 format=3 uid="uid://rgkyvd01mp4r"]
 
-[ext_resource type="Script" path="res://drum_roll.gd" id="1_kp6py"]
-[ext_resource type="PackedScene" uid="uid://duxnmj6k6phes" path="res://drum_panel.tscn" id="2_fm6mv"]
+[ext_resource type="PackedScene" uid="uid://dhrr2be82k80p" path="res://Editor.tscn" id="1_4xdah"]
+[ext_resource type="Script" path="res://drum_editor.gd" id="1_rmmlu"]
+[ext_resource type="AudioStream" uid="uid://dvt6y47kyh2hy" path="res://assets/kick.wav" id="3_osk8o"]
+[ext_resource type="AudioStream" uid="uid://87kbxj5p0qgk" path="res://assets/snare.wav" id="4_8x7le"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -11,47 +13,41 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="drum_editor" type="Panel" parent="." node_paths=PackedStringArray("kick_editor", "snare_editor")]
 layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = 182.0
-offset_top = 60.0
-offset_right = -222.0
-offset_bottom = -346.0
-color = Color(0.535023, 0.535023, 0.535023, 1)
+offset_left = -766.0
+offset_top = -532.0
+offset_right = 769.0
+offset_bottom = -99.0
+grow_horizontal = 2
+grow_vertical = 0
+script = ExtResource("1_rmmlu")
+kick_editor = NodePath("kick")
+snare_editor = NodePath("snare")
 
-[node name="drum_roll" type="GridContainer" parent="."]
+[node name="ColorRect" type="ColorRect" parent="drum_editor"]
 layout_mode = 0
-offset_left = 215.0
-offset_top = 89.0
-offset_right = 894.0
-offset_bottom = 129.0
-theme_override_constants/h_separation = 45
-columns = 9
-script = ExtResource("1_kp6py")
+offset_right = 1540.0
+offset_bottom = 435.0
+color = Color(0.905465, 0.759902, 0.659064, 1)
 
-[node name="Panel" parent="drum_roll" instance=ExtResource("2_fm6mv")]
-layout_mode = 2
+[node name="kick" parent="drum_editor" instance=ExtResource("1_4xdah")]
+layout_mode = 0
+offset_left = 115.0
+offset_top = 76.0
+offset_right = 1406.0
+offset_bottom = 195.0
+resource = ExtResource("3_osk8o")
 
-[node name="Panel2" parent="drum_roll" instance=ExtResource("2_fm6mv")]
-layout_mode = 2
-
-[node name="Panel3" parent="drum_roll" instance=ExtResource("2_fm6mv")]
-layout_mode = 2
-
-[node name="Panel4" parent="drum_roll" instance=ExtResource("2_fm6mv")]
-layout_mode = 2
-
-[node name="Panel5" parent="drum_roll" instance=ExtResource("2_fm6mv")]
-layout_mode = 2
-
-[node name="Panel6" parent="drum_roll" instance=ExtResource("2_fm6mv")]
-layout_mode = 2
-
-[node name="Panel7" parent="drum_roll" instance=ExtResource("2_fm6mv")]
-layout_mode = 2
-
-[node name="Panel8" parent="drum_roll" instance=ExtResource("2_fm6mv")]
-layout_mode = 2
+[node name="snare" parent="drum_editor" instance=ExtResource("1_4xdah")]
+layout_mode = 0
+offset_left = 104.0
+offset_top = 221.0
+offset_right = 1432.0
+offset_bottom = 320.0
+resource = ExtResource("4_8x7le")
