@@ -14,4 +14,4 @@ fov = 85.5061
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.925263, -0.00169155, 0.379323, -0.144928, 0.92255, 0.357629, -0.350549, -0.385875, 0.853356, 0, 4.2386, 0)
 
-[node name="Control" parent="." instance=ExtResource("1_minex")]
+[node name="UI" parent="." instance=ExtResource("1_minex")]

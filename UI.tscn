@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://rgkyvd01mp4r"]
+[gd_scene load_steps=9 format=3 uid="uid://rgkyvd01mp4r"]
 
 [ext_resource type="PackedScene" uid="uid://dhrr2be82k80p" path="res://Editor.tscn" id="1_4xdah"]
+[ext_resource type="Texture2D" uid="uid://brhhdbe0kepai" path="res://assets/pause.png" id="1_13m13"]
 [ext_resource type="Script" path="res://drum_editor.gd" id="1_rmmlu"]
 [ext_resource type="PackedScene" uid="uid://catftk065aav8" path="res://Header.tscn" id="2_not44"]
 [ext_resource type="AudioStream" uid="uid://dvt6y47kyh2hy" path="res://assets/kick.wav" id="3_osk8o"]
@@ -17,7 +18,16 @@ grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(1.00352, 1)
 
-[node name="drum_editor" type="Panel" parent="." node_paths=PackedStringArray("kick_editor", "snare_editor", "hh_editor", "crash_editor")]
+[node name="toggle_play" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 60.0
+offset_bottom = 60.0
+scale = Vector2(0.997, 0.998246)
+mouse_default_cursor_shape = 2
+texture = ExtResource("1_13m13")
+expand_mode = 1
+
+[node name="drum_editor" type="Panel" parent="." node_paths=PackedStringArray("play_button", "kick_editor", "snare_editor", "hh_editor", "crash_editor")]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -30,7 +40,9 @@ offset_right = 769.0
 offset_bottom = -99.0
 grow_horizontal = 2
 grow_vertical = 0
+scale = Vector2(1, 1.00105)
 script = ExtResource("1_rmmlu")
+play_button = NodePath("../toggle_play")
 kick_editor = NodePath("ScrollContainer/VBoxContainer/kick")
 snare_editor = NodePath("ScrollContainer/VBoxContainer/snare")
 hh_editor = NodePath("ScrollContainer/VBoxContainer/hi hat")

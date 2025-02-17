@@ -2,6 +2,8 @@ extends Panel
 
 @onready var header: GridContainer = $Header
 
+@export var play_button: TextureRect
+
 class editor_obj:
 	var editor: GridContainer
 	var editor_stream: AudioStreamPlayer
@@ -14,6 +16,8 @@ class editor_obj:
 @export var snare_editor: GridContainer
 @export var hh_editor: GridContainer
 @export var crash_editor: GridContainer
+
+@export var paused: bool = false
 
 var editors: Array
 
@@ -32,6 +36,12 @@ var snare: AudioStreamPlayer
 
 func _process(delta: float):
 	metronome_on = header.metronome_on
+	if (paused and !timer.is_stopped()):
+		timer.stop()
+		metronome_time = 0
+	if (!paused and timer.is_stopped()):
+		timer.start()
+		metronome_time = 0
 
 func _ready():
 	editors = [kick_editor, snare_editor, hh_editor, crash_editor]
@@ -58,15 +68,17 @@ func _ready():
 		var obj = editor_obj.new(editors[i], stream)
 		editor_objs.append(obj)
 
-	# # init kick
-	# kick = AudioStreamPlayer.new()
-	# add_child(kick)
-	# kick.stream = kick_editor.resource
+	play_button.connect("gui_input", handle_pause_play)
 
-	# #init snare
-	# snare = AudioStreamPlayer.new()
-	# add_child(snare)
-	# snare.stream = snare_editor.resource
+func handle_pause_play(event: InputEvent):
+	if event is InputEventMouseButton:
+		if (!event.pressed):
+			if (paused):
+				play_button.texture = load("res://assets/pause.png")
+			else:
+				play_button.texture = load("res://assets/play.png")
+
+			paused = !paused
 
 
 func _on_timer_timeout():
