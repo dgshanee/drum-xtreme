@@ -1,9 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://rgkyvd01mp4r"]
+[gd_scene load_steps=8 format=3 uid="uid://rgkyvd01mp4r"]
 
 [ext_resource type="PackedScene" uid="uid://dhrr2be82k80p" path="res://Editor.tscn" id="1_4xdah"]
 [ext_resource type="Script" path="res://drum_editor.gd" id="1_rmmlu"]
+[ext_resource type="PackedScene" uid="uid://catftk065aav8" path="res://Header.tscn" id="2_not44"]
 [ext_resource type="AudioStream" uid="uid://dvt6y47kyh2hy" path="res://assets/kick.wav" id="3_osk8o"]
 [ext_resource type="AudioStream" uid="uid://87kbxj5p0qgk" path="res://assets/snare.wav" id="4_8x7le"]
+[ext_resource type="AudioStream" uid="uid://df784dyd516k7" path="res://assets/crash.wav" id="4_y7oab"]
+[ext_resource type="AudioStream" uid="uid://b7wws34dwapji" path="res://assets/hh.wav" id="7_so61p"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -12,8 +15,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(1.00352, 1)
 
-[node name="drum_editor" type="Panel" parent="." node_paths=PackedStringArray("kick_editor", "snare_editor")]
+[node name="drum_editor" type="Panel" parent="." node_paths=PackedStringArray("kick_editor", "snare_editor", "hh_editor", "crash_editor")]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -27,8 +31,10 @@ offset_bottom = -99.0
 grow_horizontal = 2
 grow_vertical = 0
 script = ExtResource("1_rmmlu")
-kick_editor = NodePath("kick")
-snare_editor = NodePath("snare")
+kick_editor = NodePath("ScrollContainer/VBoxContainer/kick")
+snare_editor = NodePath("ScrollContainer/VBoxContainer/snare")
+hh_editor = NodePath("ScrollContainer/VBoxContainer/hi hat")
+crash_editor = NodePath("ScrollContainer/VBoxContainer/crash")
 
 [node name="ColorRect" type="ColorRect" parent="drum_editor"]
 layout_mode = 0
@@ -36,18 +42,35 @@ offset_right = 1540.0
 offset_bottom = 435.0
 color = Color(0.905465, 0.759902, 0.659064, 1)
 
-[node name="kick" parent="drum_editor" instance=ExtResource("1_4xdah")]
+[node name="Header" parent="drum_editor" instance=ExtResource("2_not44")]
 layout_mode = 0
-offset_left = 115.0
+offset_top = 0.0
+offset_right = 1534.0
+offset_bottom = 56.0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="drum_editor"]
+layout_mode = 0
+offset_left = 60.0
 offset_top = 76.0
-offset_right = 1406.0
-offset_bottom = 195.0
+offset_right = 1462.0
+offset_bottom = 425.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="drum_editor/ScrollContainer"]
+layout_mode = 2
+theme_override_constants/separation = 25
+
+[node name="crash" parent="drum_editor/ScrollContainer/VBoxContainer" instance=ExtResource("1_4xdah")]
+layout_mode = 2
+resource = ExtResource("4_y7oab")
+
+[node name="snare" parent="drum_editor/ScrollContainer/VBoxContainer" instance=ExtResource("1_4xdah")]
+layout_mode = 2
+resource = ExtResource("4_8x7le")
+
+[node name="kick" parent="drum_editor/ScrollContainer/VBoxContainer" instance=ExtResource("1_4xdah")]
+layout_mode = 2
 resource = ExtResource("3_osk8o")
 
-[node name="snare" parent="drum_editor" instance=ExtResource("1_4xdah")]
-layout_mode = 0
-offset_left = 104.0
-offset_top = 221.0
-offset_right = 1432.0
-offset_bottom = 320.0
-resource = ExtResource("4_8x7le")
+[node name="hi hat" parent="drum_editor/ScrollContainer/VBoxContainer" instance=ExtResource("1_4xdah")]
+layout_mode = 2
+resource = ExtResource("7_so61p")

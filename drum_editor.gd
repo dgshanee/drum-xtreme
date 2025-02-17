@@ -1,7 +1,23 @@
 extends Panel
 
+@onready var header: GridContainer = $Header
+
+class editor_obj:
+	var editor: GridContainer
+	var editor_stream: AudioStreamPlayer
+
+	func _init(e: GridContainer, s: AudioStreamPlayer):
+		editor = e
+		editor_stream = s
+
 @export var kick_editor: GridContainer
 @export var snare_editor: GridContainer
+@export var hh_editor: GridContainer
+@export var crash_editor: GridContainer
+
+var editors: Array
+
+var editor_objs: Array
 
 @export var BPM = 140
 
@@ -9,42 +25,79 @@ var timer: Timer
 
 var metronome: AudioStreamPlayer
 var metronome_time: float = 0.0
+var metronome_on: bool = false
 
 var kick: AudioStreamPlayer
 var snare: AudioStreamPlayer
 
+func _process(delta: float):
+	metronome_on = header.metronome_on
+
 func _ready():
-    # make timer
-    timer = Timer.new()
-    add_child(timer)
-    timer.wait_time = 60 / float(BPM * 4)
-    timer.connect("timeout", _on_timer_timeout)
-    timer.start()
+	editors = [kick_editor, snare_editor, hh_editor, crash_editor]
 
-    # make metronome
-    metronome = AudioStreamPlayer.new()
-    add_child(metronome)
-    metronome.stream = load("res://assets/metronome.wav")
+	# connect to header
+	header.connect("bars_was_changed", updateBars)
+	header.connect("bpm_was_changed", updateBPM)
+	# make timer
+	timer = Timer.new()
+	add_child(timer)
+	timer.wait_time = 60 / float(BPM * 4)
+	timer.connect("timeout", _on_timer_timeout)
+	timer.start()
 
-    # init kick
-    kick = AudioStreamPlayer.new()
-    add_child(kick)
-    kick.stream = kick_editor.resource
+	# make metronome
+	metronome = AudioStreamPlayer.new()
+	add_child(metronome)
+	metronome.stream = load("res://assets/metronome.wav")
 
-    #init snare
-    snare = AudioStreamPlayer.new()
-    add_child(snare)
-    snare.stream = snare_editor.resource
+	for i in range(len(editors)):
+		var stream: AudioStreamPlayer = AudioStreamPlayer.new()
+		add_child(stream)
+		stream.stream = editors[i].resource
+		var obj = editor_obj.new(editors[i], stream)
+		editor_objs.append(obj)
+
+	# # init kick
+	# kick = AudioStreamPlayer.new()
+	# add_child(kick)
+	# kick.stream = kick_editor.resource
+
+	# #init snare
+	# snare = AudioStreamPlayer.new()
+	# add_child(snare)
+	# snare.stream = snare_editor.resource
 
 
 func _on_timer_timeout():
-    if (kick_editor.arr[metronome_time].active):
-        kick.play()
+	metronome_time = fmod(metronome_time, len(kick_editor.arr))
+	if (len(kick_editor.arr) > 20):
+		print(metronome_time)
+		print(kick_editor.arr[metronome_time].active)
+	if (len(kick_editor.arr) > 0):
+		# if (kick_editor.arr[metronome_time].active):
+		# 	kick.play()
+		# if (snare_editor.arr[metronome_time].active):
+		# 	snare.play()
 
-    if (snare_editor.arr[metronome_time].active):
-        snare.play()
-    metronome_time += 1
-    if (metronome_time >= kick_editor.bars * 4):
-        metronome_time = 0
-    if (fmod(metronome_time, 4) == 1.0):
-        metronome.play()
+		# for editor in editor_objs:
+		# 	if (editor.arr[metronome_time].active):
+		# 		editor.play()
+
+		for obj in editor_objs:
+			if (obj.editor.arr[metronome_time].active):
+				print("playing")
+				obj.editor_stream.play()
+
+	metronome_time += 1
+	if (fmod(metronome_time, 4) == 1.0) and metronome_on:
+		metronome.play()
+
+func updateBars(bars_input: int):
+	metronome_time = 0
+	for editor in editors:
+		editor.updateEditorBars(bars_input)
+
+func updateBPM(b: int):
+	BPM = b
+	timer.wait_time = 60 / float(BPM * 4)

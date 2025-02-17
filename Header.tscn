@@ -1,0 +1,70 @@
+[gd_scene load_steps=2 format=3 uid="uid://catftk065aav8"]
+
+[ext_resource type="Script" path="res://Header.gd" id="1_0fojx"]
+
+[node name="Header" type="GridContainer" node_paths=PackedStringArray("bpm_input", "bars_input")]
+layout_direction = 3
+offset_top = 2.0
+offset_right = 1275.0
+offset_bottom = 58.0
+theme_override_constants/h_separation = 700
+columns = 3
+script = ExtResource("1_0fojx")
+bpm_input = NodePath("bpm_container/bpm_edit")
+bars_input = NodePath("bars_container/bars_edit")
+
+[node name="metronome_container" type="Control" parent="."]
+layout_mode = 2
+
+[node name="metronome_toggle" type="Button" parent="metronome_container"]
+layout_mode = 0
+offset_left = 18.0
+offset_top = 8.0
+offset_right = 26.0
+offset_bottom = 17.0
+mouse_default_cursor_shape = 2
+toggle_mode = true
+
+[node name="Label" type="Label" parent="metronome_container"]
+layout_mode = 0
+offset_left = 32.0
+offset_right = 132.0
+offset_bottom = 23.0
+text = "Metronome: "
+
+[node name="bpm_container" type="Control" parent="."]
+layout_mode = 2
+
+[node name="bpm_display" type="Label" parent="bpm_container"]
+layout_mode = 2
+offset_left = 98.0
+offset_top = 1.0
+offset_right = 142.0
+offset_bottom = 24.0
+text = "BPM: "
+
+[node name="bpm_edit" type="LineEdit" parent="bpm_container"]
+layout_mode = 2
+offset_left = 19.9375
+offset_right = 87.0
+offset_bottom = 31.0
+placeholder_text = "140"
+max_length = 3
+virtual_keyboard_type = 2
+
+[node name="bars_container" type="Control" parent="."]
+layout_mode = 2
+
+[node name="bars_edit" type="LineEdit" parent="bars_container"]
+layout_mode = 2
+offset_left = -76.0625
+offset_right = -9.0
+offset_bottom = 31.0
+placeholder_text = "4"
+
+[node name="bars_display" type="Label" parent="bars_container"]
+layout_mode = 2
+offset_left = -4.0
+offset_right = -3.0
+offset_bottom = 23.0
+text = "BARS:"
