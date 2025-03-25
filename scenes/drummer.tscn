@@ -1,0 +1,49 @@
+[gd_scene load_steps=7 format=3 uid="uid://bhxtbf0ab37yh"]
+
+[ext_resource type="PackedScene" uid="uid://dicktrcpkj2xi" path="res://assets/drummer.glb" id="1_6vj2n"]
+[ext_resource type="AnimationLibrary" uid="uid://c0i10ftsx65ht" path="res://animations_DEL.res" id="2_6p8wx"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_xjsei"]
+animation = &"test_r"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_vfeea"]
+animation = &"test_l"
+
+[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_o8icq"]
+filter_enabled = true
+filters = ["metarig/Skeleton3D:forearm.L", "metarig/Skeleton3D:upper_arm.L"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_djst2"]
+graph_offset = Vector2(-260.16, -26.88)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_vfeea")
+nodes/Animation/position = Vector2(-30, 20)
+"nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_xjsei")
+"nodes/Animation 2/position" = Vector2(-40, 170)
+nodes/Blend2/node = SubResource("AnimationNodeBlend2_o8icq")
+nodes/Blend2/position = Vector2(130, 80)
+node_connections = [&"Blend2", 0, &"Animation", &"Blend2", 1, &"Animation 2", &"output", 0, &"Blend2"]
+
+[node name="drummer" instance=ExtResource("1_6vj2n")]
+
+[node name="Skeleton3D" parent="metarig" index="1"]
+bones/3/rotation = Quaternion(0.0703962, 0, 0, 0.997519)
+bones/6/rotation = Quaternion(-0.203373, 0, 0, 0.979101)
+bones/8/rotation = Quaternion(0.255745, 0.942838, -0.211373, -0.0311991)
+bones/9/rotation = Quaternion(0.0422153, -0.0795728, -0.023471, 0.995658)
+bones/12/rotation = Quaternion(-0.117673, -0.618386, 0.486244, 0.606068)
+bones/13/rotation = Quaternion(0.221651, -0.0290302, 0.365282, 0.903658)
+bones/17/rotation = Quaternion(0.708201, -0.0108914, 0.00503035, 0.705909)
+bones/18/rotation = Quaternion(0.696085, -0.014693, -0.00456824, 0.717794)
+bones/20/rotation = Quaternion(0.713764, -0.0213528, -0.0191963, 0.699797)
+bones/21/rotation = Quaternion(0.660743, -0.00473542, -0.0344642, 0.749806)
+bones/22/rotation = Quaternion(-0.085484, 0.0010175, 0.00481575, 0.996327)
+
+[node name="AnimationPlayer" parent="." index="1"]
+libraries = {
+"": ExtResource("2_6p8wx")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="2"]
+tree_root = SubResource("AnimationNodeBlendTree_djst2")
+anim_player = NodePath("../AnimationPlayer")
+parameters/Blend2/blend_amount = 1.0

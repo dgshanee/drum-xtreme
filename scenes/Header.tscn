@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://catftk065aav8"]
 
-[ext_resource type="Script" path="res://Header.gd" id="1_0fojx"]
+[ext_resource type="Script" path="res://scripts/Header.gd" id="1_0fojx"]
 
 [node name="Header" type="GridContainer" node_paths=PackedStringArray("bpm_input", "bars_input")]
 layout_direction = 3

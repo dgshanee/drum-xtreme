@@ -1,13 +1,18 @@
-[gd_scene load_steps=9 format=3 uid="uid://rgkyvd01mp4r"]
+[gd_scene load_steps=14 format=3 uid="uid://rgkyvd01mp4r"]
 
-[ext_resource type="PackedScene" uid="uid://dhrr2be82k80p" path="res://Editor.tscn" id="1_4xdah"]
+[ext_resource type="PackedScene" uid="uid://dhrr2be82k80p" path="res://scenes/Editor.tscn" id="1_4xdah"]
 [ext_resource type="Texture2D" uid="uid://brhhdbe0kepai" path="res://assets/pause.png" id="1_13m13"]
-[ext_resource type="Script" path="res://drum_editor.gd" id="1_rmmlu"]
-[ext_resource type="PackedScene" uid="uid://catftk065aav8" path="res://Header.tscn" id="2_not44"]
+[ext_resource type="Script" path="res://scripts/drum_editor.gd" id="1_rmmlu"]
+[ext_resource type="PackedScene" uid="uid://catftk065aav8" path="res://scenes/Header.tscn" id="2_not44"]
 [ext_resource type="AudioStream" uid="uid://dvt6y47kyh2hy" path="res://assets/kick.wav" id="3_osk8o"]
 [ext_resource type="AudioStream" uid="uid://87kbxj5p0qgk" path="res://assets/snare.wav" id="4_8x7le"]
+[ext_resource type="PackedScene" uid="uid://droxdj5e7bfh2" path="res://scenes/traverser.tscn" id="4_en8u7"]
 [ext_resource type="AudioStream" uid="uid://df784dyd516k7" path="res://assets/crash.wav" id="4_y7oab"]
 [ext_resource type="AudioStream" uid="uid://b7wws34dwapji" path="res://assets/hh.wav" id="7_so61p"]
+[ext_resource type="Texture2D" uid="uid://bidt7t0ab3jch" path="res://assets/kick-drum.png" id="9_fj3jh"]
+[ext_resource type="Texture2D" uid="uid://ctls773etsk8b" path="res://assets/snare.png" id="10_s2s6x"]
+[ext_resource type="Texture2D" uid="uid://bxxvqv21b3ao8" path="res://assets/hi_hat.png" id="11_1k5gu"]
+[ext_resource type="Texture2D" uid="uid://bbay7fhbk5mff" path="res://assets/crash.jpeg" id="12_j5agj"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -27,7 +32,7 @@ mouse_default_cursor_shape = 2
 texture = ExtResource("1_13m13")
 expand_mode = 1
 
-[node name="drum_editor" type="Panel" parent="." node_paths=PackedStringArray("play_button", "kick_editor", "snare_editor", "hh_editor", "crash_editor")]
+[node name="drum_editor" type="Panel" parent="." node_paths=PackedStringArray("play_button", "kick_editor", "snare_editor", "hh_editor", "crash_editor", "traverser")]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -47,6 +52,7 @@ kick_editor = NodePath("ScrollContainer/VBoxContainer/kick")
 snare_editor = NodePath("ScrollContainer/VBoxContainer/snare")
 hh_editor = NodePath("ScrollContainer/VBoxContainer/hi hat")
 crash_editor = NodePath("ScrollContainer/VBoxContainer/crash")
+traverser = NodePath("ScrollContainer/VBoxContainer/traverser")
 
 [node name="ColorRect" type="ColorRect" parent="drum_editor"]
 layout_mode = 0
@@ -62,14 +68,18 @@ offset_bottom = 56.0
 
 [node name="ScrollContainer" type="ScrollContainer" parent="drum_editor"]
 layout_mode = 0
-offset_left = 60.0
-offset_top = 76.0
-offset_right = 1462.0
-offset_bottom = 425.0
+offset_left = 145.804
+offset_top = 75.9202
+offset_right = 1547.8
+offset_bottom = 424.92
 
 [node name="VBoxContainer" type="VBoxContainer" parent="drum_editor/ScrollContainer"]
 layout_mode = 2
 theme_override_constants/separation = 25
+
+[node name="traverser" parent="drum_editor/ScrollContainer/VBoxContainer" instance=ExtResource("4_en8u7")]
+layout_mode = 2
+size_flags_vertical = 3
 
 [node name="crash" parent="drum_editor/ScrollContainer/VBoxContainer" instance=ExtResource("1_4xdah")]
 layout_mode = 2
@@ -86,3 +96,43 @@ resource = ExtResource("3_osk8o")
 [node name="hi hat" parent="drum_editor/ScrollContainer/VBoxContainer" instance=ExtResource("1_4xdah")]
 layout_mode = 2
 resource = ExtResource("7_so61p")
+
+[node name="kick_pic" type="TextureRect" parent="drum_editor"]
+layout_mode = 0
+offset_left = 48.1476
+offset_top = 236.751
+offset_right = 88.1476
+offset_bottom = 276.751
+scale = Vector2(1.78785, 1.84416)
+texture = ExtResource("9_fj3jh")
+expand_mode = 1
+
+[node name="snare_pic" type="TextureRect" parent="drum_editor"]
+layout_mode = 0
+offset_left = 48.1476
+offset_top = 159.832
+offset_right = 88.1476
+offset_bottom = 199.832
+scale = Vector2(1.78785, 1.84416)
+texture = ExtResource("10_s2s6x")
+expand_mode = 1
+
+[node name="hi_hat_pic" type="TextureRect" parent="drum_editor"]
+layout_mode = 0
+offset_left = 48.1476
+offset_top = 315.669
+offset_right = 88.1476
+offset_bottom = 355.669
+scale = Vector2(1.78785, 1.84416)
+texture = ExtResource("11_1k5gu")
+expand_mode = 1
+
+[node name="crash_pic" type="TextureRect" parent="drum_editor"]
+layout_mode = 0
+offset_left = 48.1476
+offset_top = 74.9213
+offset_right = 88.1476
+offset_bottom = 114.921
+scale = Vector2(1.78785, 1.84416)
+texture = ExtResource("12_j5agj")
+expand_mode = 1

@@ -1,6 +1,6 @@
 extends GridContainer
 
-const Notch = preload("res://Notch.tscn")
+const Notch = preload("res://scenes/Notch.tscn")
 
 
 @export var bars: int = 5
@@ -19,9 +19,7 @@ func createNotches():
 			add_child(notch)
 			arr.append(notch)
 
-	print(len(arr))
 	
-
 func _ready():
 	size.x = 1291
 	size.y = 119

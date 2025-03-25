@@ -1,14 +1,15 @@
 [gd_scene load_steps=2 format=3 uid="uid://dhrr2be82k80p"]
 
-[ext_resource type="Script" path="res://editor.gd" id="1_ukudj"]
+[ext_resource type="Script" path="res://scripts/Editor.gd" id="1_3wmg6"]
 
 [node name="Editor" type="GridContainer"]
 clip_contents = true
 custom_minimum_size = Vector2(3000, 60)
 offset_left = -1.0
-offset_top = -1.0
-offset_right = 1389.0
-offset_bottom = 187.0
+offset_right = 2999.0
+offset_bottom = 188.0
+scale = Vector2(0.978889, 1)
 theme_override_constants/h_separation = 45
-script = ExtResource("1_ukudj")
+script = ExtResource("1_3wmg6")
 bars = 4
+metadata/_edit_use_anchors_ = true

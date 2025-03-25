@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://bc0e6ktxym4ep"
-path="res://.godot/imported/setting.glb-acb21ed96cf6b4e0782767cf5e92c0cc.scn"
+uid="uid://dicktrcpkj2xi"
+path="res://.godot/imported/drummer.glb-8a1df4ec38089a01019d006edb9518c7.scn"
 
 [deps]
 
-source_file="res://setting.glb"
-dest_files=["res://.godot/imported/setting.glb-acb21ed96cf6b4e0782767cf5e92c0cc.scn"]
+source_file="res://assets/drummer.glb"
+dest_files=["res://.godot/imported/drummer.glb-8a1df4ec38089a01019d006edb9518c7.scn"]
 
 [params]
 

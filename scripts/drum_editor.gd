@@ -16,6 +16,8 @@ class editor_obj:
 @export var snare_editor: GridContainer
 @export var hh_editor: GridContainer
 @export var crash_editor: GridContainer
+@export var traverser: Control
+@onready var traverser_container = $ScrollContainer/VBoxContainer/traverser/traverser_container
 
 @export var paused: bool = false
 
@@ -83,22 +85,14 @@ func handle_pause_play(event: InputEvent):
 
 func _on_timer_timeout():
 	metronome_time = fmod(metronome_time, len(kick_editor.arr))
-	if (len(kick_editor.arr) > 20):
-		print(metronome_time)
-		print(kick_editor.arr[metronome_time].active)
 	if (len(kick_editor.arr) > 0):
-		# if (kick_editor.arr[metronome_time].active):
-		# 	kick.play()
-		# if (snare_editor.arr[metronome_time].active):
-		# 	snare.play()
-
-		# for editor in editor_objs:
-		# 	if (editor.arr[metronome_time].active):
-		# 		editor.play()
-
+		if (metronome_time > 0):
+			traverser_container.arr[metronome_time - 1].active = false
+		else:
+			traverser_container.arr[-1].active = false
+		traverser_container.arr[metronome_time].active = true
 		for obj in editor_objs:
 			if (obj.editor.arr[metronome_time].active):
-				print("playing")
 				obj.editor_stream.play()
 
 	metronome_time += 1
@@ -109,6 +103,8 @@ func updateBars(bars_input: int):
 	metronome_time = 0
 	for editor in editors:
 		editor.updateEditorBars(bars_input)
+
+	traverser.updateTraverserBars(bars_input)
 
 func updateBPM(b: int):
 	BPM = b

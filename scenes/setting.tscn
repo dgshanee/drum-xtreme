@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://bjab24eh5fs21"]
+
+[ext_resource type="PackedScene" uid="uid://dicktrcpkj2xi" path="res://assets/drummer.glb" id="1_r2eux"]
+[ext_resource type="PackedScene" uid="uid://bc0e6ktxym4ep" path="res://assets/setting.glb" id="2_e0edd"]
+[ext_resource type="PackedScene" uid="uid://rgkyvd01mp4r" path="res://scenes/UI.tscn" id="3_jxdbd"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.710882, -0.149173, 0.687309, 0.0107689, 0.979442, 0.20144, -0.703228, -0.135798, 0.697874, 1.72953, 3.17674, 1.45224)
+fov = 85.5061
+
+[node name="setting" parent="." instance=ExtResource("2_e0edd")]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.925263, -0.00169155, 0.379323, -0.144928, 0.92255, 0.357629, -0.350549, -0.385875, 0.853356, 0, 4.2386, 0)
+
+[node name="UI" parent="." instance=ExtResource("3_jxdbd")]
+visible = false
+
+[node name="drummer" parent="." instance=ExtResource("1_r2eux")]
